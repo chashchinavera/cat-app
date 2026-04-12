@@ -1,18 +1,65 @@
 import Card from "../card/Card";
 import styles from "./CardList.module.css";
 import type { Cat } from "@/types/cat";
+import { useRef, useEffect } from "react";
 
 interface CardListProps {
   cats: Cat[];
+  isCatsLoading?: boolean;
+  hasMoreCats?: boolean;
+  loadMoreCats?: () => void;
 }
 
-const CardList = ({ cats }: CardListProps) => {
+const CardList = ({
+  cats,
+  isCatsLoading,
+  hasMoreCats,
+  loadMoreCats,
+}: CardListProps) => {
+  const observerTarget = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          !isCatsLoading &&
+          hasMoreCats &&
+          loadMoreCats
+        ) {
+          loadMoreCats();
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "200px",
+      },
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [loadMoreCats, isCatsLoading, hasMoreCats]);
+
   return (
-    <div className={styles.grid}>
-      {cats.map((cat) => (
-        <Card key={cat.id} cat={cat} />
-      ))}
-    </div>
+    <>
+      <div className={styles.grid}>
+        {cats.map((cat) => (
+          <Card key={cat.id} cat={cat} />
+        ))}
+      </div>
+      <div ref={observerTarget} className={styles.load_tracker}>
+        {isCatsLoading && (
+          <p className={styles.loader}>... загружаем еще котиков ...</p>
+        )}
+      </div>
+    </>
   );
 };
 

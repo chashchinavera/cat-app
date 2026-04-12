@@ -7,10 +7,13 @@ import { fetchCats } from "@/services/catService";
 interface CatsState {
   cats: Cat[];
   favorites: Cat[];
+  catsPage: number;
+  isCatsLoading: boolean;
+  hasMoreCats: boolean;
   addToFavorites: (catId: string) => void;
   removeFromFavorites: (catId: string) => void;
   isFavorite: (catId: string) => boolean;
-  loadMoreCats: (page: number, limit: number) => void;
+  loadMoreCats: () => void;
 }
 
 export const useCatsStore = create<CatsState>()(
@@ -18,6 +21,9 @@ export const useCatsStore = create<CatsState>()(
     (set, get) => ({
       cats: [],
       favorites: [],
+      catsPage: 0,
+      isCatsLoading: false,
+      hasMoreCats: true,
 
       addToFavorites: (catId) =>
         set((state) => ({
@@ -33,11 +39,21 @@ export const useCatsStore = create<CatsState>()(
         })),
 
       isFavorite: (catId) => get().favorites.some((cat) => cat.id === catId),
-      loadMoreCats: async (page, limit) => {
-        const newCats = await fetchCats(page, limit);
+      loadMoreCats: async () => {
+        const state = get();
+        if (state.isCatsLoading || !state.hasMoreCats) return;
 
         set({
-          cats: newCats,
+          isCatsLoading: true,
+        });
+
+        const newCats = await fetchCats(state.catsPage, 10);
+
+        set({
+          cats: [...state.cats, ...newCats],
+          catsPage: state.catsPage + 1,
+          isCatsLoading: false,
+          hasMoreCats: newCats.length !== 0,
         });
       },
     }),

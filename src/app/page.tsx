@@ -5,17 +5,22 @@ import { useCatsStore } from "@/store/useCatsStore";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { cats, loadMoreCats } = useCatsStore();
+  const { cats, loadMoreCats, isCatsLoading, hasMoreCats } = useCatsStore();
 
   useEffect(() => {
     if (cats.length === 0) {
-      loadMoreCats(1, 10);
+      loadMoreCats();
     }
   }, [cats.length, loadMoreCats]);
 
   return (
     <>
-      <CardList cats={cats} />
+      <CardList
+        cats={cats}
+        loadMoreCats={loadMoreCats}
+        isCatsLoading={isCatsLoading}
+        hasMoreCats={hasMoreCats}
+      />
     </>
   );
 }
