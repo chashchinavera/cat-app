@@ -22,7 +22,7 @@
 .card:hover .button {
     width: 48px;
     height: 48px;
-    background-image: url('/images/HoveredBlock.svg');
+    background-image: url('/cat-app/images/HoveredBlock.svg');
     background-size: cover;
     background-position: center;
     background-size: 40px 36.7px;
@@ -36,13 +36,13 @@
 }
 
 .card:hover .button_active {
-    background-image: url('/images/ClickedHeart.svg');
+    background-image: url('/cat-app/images/ClickedHeart.svg');
 }
 
 .card:hover .button:hover {
-    background-image: url('/images/HoveredHeart.svg');
+    background-image: url('/cat-app/images/HoveredHeart.svg');
 }
 
 .card:hover .button:active {
-    background-image: url('/images/ClickedHeart.svg');
+    background-image: url('/cat-app/images/ClickedHeart.svg');
 }
