@@ -30,8 +30,8 @@
     background-repeat: no-repeat;
     border: none;
     position: absolute;
-    bottom: 4px;
-    right: 0;
+    bottom: 17px;
+    right: 15px;
     z-index: 1000;
     cursor: pointer;
 }
