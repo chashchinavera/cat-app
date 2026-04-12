@@ -1,0 +1,48 @@
+.card {
+    width: 255px;
+    height: 255px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover {
+    box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.18), 0 6px 5px 0 rgba(0, 0, 0, 0.24);
+    transform: scale(1.1);
+}
+
+.img {
+    width: 225px;
+    height: 225px;
+    background-position: center;
+    background-size: cover;
+}
+
+.card:hover .button {
+    width: 48px;
+    height: 48px;
+    background-image: url('/images/HoveredBlock.svg');
+    background-size: cover;
+    background-position: center;
+    background-size: 40px 36.7px;
+    background-repeat: no-repeat;
+    border: none;
+    position: absolute;
+    bottom: 4px;
+    right: 0;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.card:hover .button_active {
+    background-image: url('/images/ClickedHeart.svg');
+}
+
+.card:hover .button:hover {
+    background-image: url('/images/HoveredHeart.svg');
+}
+
+.card:hover .button:active {
+    background-image: url('/images/ClickedHeart.svg');
+}

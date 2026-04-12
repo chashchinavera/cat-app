@@ -1,22 +1,30 @@
+"use client";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { Cat } from "@/types/cat";
+import { fetchCats } from "@/services/catService";
 
-interface FavoriteState {
+interface CatsState {
+  cats: Cat[];
   favorites: Cat[];
-  addToFavorites: (cat: Cat) => void;
+  addToFavorites: (catId: string) => void;
   removeFromFavorites: (catId: string) => void;
   isFavorite: (catId: string) => boolean;
+  loadMoreCats: (page: number, limit: number) => void;
 }
 
-export const useFavoriteStore = create<FavoriteState>()(
+export const useCatsStore = create<CatsState>()(
   persist(
     (set, get) => ({
+      cats: [],
       favorites: [],
 
-      addToFavorites: (cat) =>
+      addToFavorites: (catId) =>
         set((state) => ({
-          favorites: [...state.favorites, cat],
+          favorites: [
+            ...state.favorites,
+            ...state.cats.filter((cat) => cat.id === catId),
+          ],
         })),
 
       removeFromFavorites: (catId) =>
@@ -25,6 +33,13 @@ export const useFavoriteStore = create<FavoriteState>()(
         })),
 
       isFavorite: (catId) => get().favorites.some((cat) => cat.id === catId),
+      loadMoreCats: async (page, limit) => {
+        const newCats = await fetchCats(page, limit);
+
+        set({
+          cats: newCats,
+        });
+      },
     }),
     {
       name: "cat-favorites-storage",

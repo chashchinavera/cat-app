@@ -1,0 +1,10 @@
+.grid {
+    box-sizing: border-box;
+    padding: 51px 20px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 255px);
+    grid-template-rows: repeat(auto-fit, 255px);
+    gap: 18px;
+    justify-content: center;
+    justify-items: center;
+}
