@@ -27,7 +27,7 @@ const Card = ({ cat }: CardProps) => {
         alt="Кот"
         width={225}
         height={225}
-        loading="eager"
+        loading="lazy"
       />
       <div
         className={`${styles.button} ${isFavorite(cat.id) ? styles.button_active : ""}`}
