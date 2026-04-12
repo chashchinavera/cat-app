@@ -46,15 +46,22 @@ export const useCatsStore = create<CatsState>()(
         set({
           isCatsLoading: true,
         });
+        try {
+          const newCats = await fetchCats(state.catsPage, 10);
 
-        const newCats = await fetchCats(state.catsPage, 10);
+          set({
+            cats: [...state.cats, ...newCats],
+            catsPage: state.catsPage + 1,
+            isCatsLoading: false,
+            hasMoreCats: newCats.length !== 0,
+          });
+        } catch (error) {
+          console.error("Ошибка при загрузке котов:", error);
 
-        set({
-          cats: [...state.cats, ...newCats],
-          catsPage: state.catsPage + 1,
-          isCatsLoading: false,
-          hasMoreCats: newCats.length !== 0,
-        });
+          set({
+            isCatsLoading: false,
+          });
+        }
       },
     }),
     {
