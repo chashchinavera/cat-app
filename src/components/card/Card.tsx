@@ -1,4 +1,5 @@
 import { useCatsStore } from "@/store/useCatsStore";
+import { memo } from "react";
 import styles from "./Card.module.css";
 import type { Cat } from "@/types/cat";
 import Image from "next/image";
@@ -7,15 +8,19 @@ interface CardProps {
   cat: Cat;
 }
 
-const Card = ({ cat }: CardProps) => {
-  const { isFavorite, addToFavorites, removeFromFavorites } = useCatsStore();
+const Card = memo(function Card({ cat }: CardProps) {
+  const addToFavorites = useCatsStore((state) => state.addToFavorites);
+  const removeFromFavorites = useCatsStore(
+    (state) => state.removeFromFavorites,
+  );
+
+  const isFav = useCatsStore((state) => state.isFavorite(cat.id));
 
   function handleFavorites() {
-    const currentId = cat.id;
-    if (isFavorite(currentId)) {
-      removeFromFavorites(currentId);
+    if (isFav) {
+      removeFromFavorites(cat.id);
     } else {
-      addToFavorites(currentId);
+      addToFavorites(cat.id);
     }
   }
 
@@ -30,11 +35,11 @@ const Card = ({ cat }: CardProps) => {
         loading="lazy"
       />
       <div
-        className={`${styles.button} ${isFavorite(cat.id) ? styles.button_active : ""}`}
+        className={`${styles.button} ${isFav ? styles.button_active : ""}`}
         onClick={handleFavorites}
       ></div>
     </div>
   );
-};
+});
 
 export default Card;
