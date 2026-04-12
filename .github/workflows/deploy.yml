@@ -26,7 +26,9 @@ jobs:
         run: npm install
 
       - name: Build with Next.js
-        run: npm run build
+        run: npx next build
+        env:
+          NEXT_PUBLIC_CAT_API_KEY: ${{ secrets.NEXT_PUBLIC_CAT_API_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
