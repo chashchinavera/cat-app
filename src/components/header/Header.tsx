@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
+import { ThemeToggle } from "../themeToggle/ThemeToggle";
 
 const Header = () => {
   const pathname = usePathname();
@@ -22,6 +23,8 @@ const Header = () => {
           Любимые котики
         </Link>
       </nav>
+
+      <ThemeToggle />
     </header>
   );
 };

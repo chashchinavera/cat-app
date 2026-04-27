@@ -1,10 +1,17 @@
 :root {
     --bg-color: rgb(255, 255, 255);
     --text-color: rgb(0, 0, 0);
-    --primary-color:rgba(33, 150, 243, 1);
+    --primary-color: rgba(33, 150, 243, 1);
     --primary-color-selected: rgba(30, 136, 229, 1);
     --secondary-color: rgba(255, 255, 255, 1);
     --secondary-color-disabled: rgba(255, 255, 255, 0.7);
+}
+
+.dark {
+    --bg-color: rgb(0, 0, 0);
+    --text-color: rgb(255, 255, 255);
+    --secondary-color: rgb(0, 0, 0);
+    --secondary-color-disabled: rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -26,4 +33,5 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease;
 }

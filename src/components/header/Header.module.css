@@ -7,6 +7,8 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav {
@@ -21,6 +23,7 @@
     height: 100%;
     text-decoration: none;
     align-items: center;
+    transition: color 0.3s ease;
 }
 
 .active {
