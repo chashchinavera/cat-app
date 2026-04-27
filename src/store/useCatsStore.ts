@@ -10,6 +10,7 @@ interface CatsState {
   catsPage: number;
   isCatsLoading: boolean;
   hasMoreCats: boolean;
+  isError: boolean;
   addToFavorites: (catId: string) => void;
   removeFromFavorites: (catId: string) => void;
   isFavorite: (catId: string) => boolean;
@@ -24,6 +25,7 @@ export const useCatsStore = create<CatsState>()(
       catsPage: 0,
       isCatsLoading: false,
       hasMoreCats: true,
+      isError: false,
 
       addToFavorites: (catId) =>
         set((state) => ({
@@ -45,6 +47,7 @@ export const useCatsStore = create<CatsState>()(
 
         set({
           isCatsLoading: true,
+          isError: false,
         });
         try {
           const newCats = await fetchCats(state.catsPage, 10);
@@ -59,6 +62,7 @@ export const useCatsStore = create<CatsState>()(
           console.error("Ошибка при загрузке котов:", error);
 
           set({
+            isError: true,
             isCatsLoading: false,
           });
         }

@@ -7,6 +7,7 @@ interface CardListProps {
   cats: Cat[];
   isCatsLoading?: boolean;
   hasMoreCats?: boolean;
+  isError?: boolean;
   loadMoreCats?: () => void;
 }
 
@@ -14,6 +15,7 @@ const CardList = ({
   cats,
   isCatsLoading,
   hasMoreCats,
+  isError,
   loadMoreCats,
 }: CardListProps) => {
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -24,6 +26,7 @@ const CardList = ({
         if (
           entries[0].isIntersecting &&
           !isCatsLoading &&
+          !isError &&
           hasMoreCats &&
           loadMoreCats
         ) {
@@ -45,7 +48,7 @@ const CardList = ({
         observer.unobserve(observerTarget.current);
       }
     };
-  }, [loadMoreCats, isCatsLoading, hasMoreCats]);
+  }, [loadMoreCats, isCatsLoading, hasMoreCats, isError]);
 
   return (
     <>
@@ -56,7 +59,15 @@ const CardList = ({
       </div>
       <div ref={observerTarget} className={styles.load_tracker}>
         {isCatsLoading && (
-          <p className={styles.loader}>... загружаем еще котиков ...</p>
+          <p className={styles.info_text}>... загружаем еще котиков ...</p>
+        )}
+        {isError && (
+          <div className={styles.error_container}>
+            <p className={styles.info_text}>Не удалось загрузить котиков</p>
+            <button className={styles.reload_button} onClick={loadMoreCats}>
+              Обновить страницу
+            </button>
+          </div>
         )}
       </div>
     </>

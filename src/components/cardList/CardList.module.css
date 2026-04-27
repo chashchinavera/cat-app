@@ -19,7 +19,21 @@
     margin-top: 20px;
 }
 
-.loader {
+.info_text {
     color: var(--text-color-loader);
     text-align: center;
+}
+
+.error_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.reload_button {
+    background-color: var(--bg-header-color);
+    color: var(--text-color-active);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 10px;
+    margin: 15px;
 }
