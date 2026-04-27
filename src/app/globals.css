@@ -1,10 +1,10 @@
 :root {
-    --bg-base-color: rgb(255, 255, 255);
-    --bg-header-color: rgba(33, 150, 243, 1);
-    --bg-header-color-active: rgba(30, 136, 229, 1);
-    --text-color-active: rgba(255, 255, 255, 1);
-    --text-color: rgba(255, 255, 255, 0.7);
-    --text-color-loader: rgb(0, 0, 0);
+    --bg-color: rgb(255, 255, 255);
+    --text-color: rgb(0, 0, 0);
+    --primary-color:rgba(33, 150, 243, 1);
+    --primary-color-selected: rgba(30, 136, 229, 1);
+    --secondary-color: rgba(255, 255, 255, 1);
+    --secondary-color-disabled: rgba(255, 255, 255, 0.7);
 }
 
 * {
@@ -23,7 +23,7 @@ body {
     line-height: 21px;
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-base-color);
+    background-color: var(--bg-color);
     color: var(--text-color);
     -webkit-font-smoothing: antialiased;
 }

@@ -1,7 +1,7 @@
 .header {
     display: flex;
     height: 64px;
-    background-color: var(--bg-header-color);
+    background-color: var(--primary-color);
     padding: 0px 62px;
     box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.24);
     position: sticky;
@@ -17,13 +17,13 @@
 .link {
     display: flex;
     padding: 0 24px;
-    color: var(--text-color);
+    color: var(--secondary-color-disabled);
     height: 100%;
     text-decoration: none;
     align-items: center;
 }
 
 .active {
-    background-color: var(--bg-header-color-active);
-    color: var(--text-color-active);
+    background-color: var(--primary-color-selected);
+    color: var(--secondary-color);
 }
