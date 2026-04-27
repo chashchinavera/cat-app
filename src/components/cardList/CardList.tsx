@@ -65,7 +65,7 @@ const CardList = ({
           <div className={styles.error_container}>
             <p className={styles.info_text}>Не удалось загрузить котиков</p>
             <button className={styles.reload_button} onClick={loadMoreCats}>
-              Обновить страницу
+              Загрузить еще котиков
             </button>
           </div>
         )}
