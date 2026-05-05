@@ -71,6 +71,7 @@ export const useCatsStore = create<CatsState>()(
     {
       name: "cat-favorites-storage",
       storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ favorites: state.favorites }),
     },
   ),
 );
