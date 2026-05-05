@@ -27,13 +27,18 @@ export const useCatsStore = create<CatsState>()(
       hasMoreCats: true,
       isError: false,
 
-      addToFavorites: (catId) =>
-        set((state) => ({
-          favorites: [
-            ...state.favorites,
-            ...state.cats.filter((cat) => cat.id === catId),
-          ],
-        })),
+      addToFavorites: (catId) => {
+        const state = get();
+
+        if (state.favorites.some((cat) => cat.id !== catId)) {
+          set((state) => ({
+            favorites: [
+              ...state.favorites,
+              ...state.cats.filter((cat) => cat.id === catId),
+            ],
+          }));
+        }
+      },
 
       removeFromFavorites: (catId) =>
         set((state) => ({
